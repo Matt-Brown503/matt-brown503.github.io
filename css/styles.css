@@ -7381,6 +7381,12 @@ section {
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.landing a {
+  text-decoration: none;
+}
+.landing a:hover, .landing a:active, .landing a:hover, .landing a:focus {
+  color: #fff;
+}
 
 header h1 {
   font-weight: bold;
@@ -7399,7 +7405,6 @@ header h1 span {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  opacity: 0;
   -webkit-transition: 2s;
   transition: 2s;
 }
@@ -7412,6 +7417,7 @@ header h1 span {
 }
 .scroll:hover {
   cursor: pointer;
+  color: #fff;
 }
 
 .load {
@@ -7518,6 +7524,10 @@ header h1 span {
 .work .desktop-button {
   display: none;
 }
+.work a {
+  text-decoration: none;
+  color: #f09120;
+}
 .work h2 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -7531,7 +7541,7 @@ header h1 span {
   padding: 0 10px;
   text-align: center;
 }
-.work .site-content a {
+.work .site-content .links {
   display: inline-block;
   background-color: #f09120;
   padding: 10px 30px;
@@ -7542,7 +7552,7 @@ header h1 span {
   z-indx: 2;
   border-radius: 5px;
 }
-.work .site-content a:hover {
+.work .site-content .links:hover {
   background-color: #b97019;
 }
 .work .site-content .tools {

@@ -61,6 +61,14 @@ section {
 		justify-content: center;
 		flex-direction: column;
 	}
+
+	a {
+		text-decoration: none;
+		&:hover,&:active,&:hover, &:focus {
+			color: $white;
+		}
+
+	}
 }
 header h1 {
 	font-weight: bold;
@@ -76,6 +84,7 @@ header h1 {
 	text-align: center;
 	color: $white;
 	align-self: center;
+	transition: 2s;
 
 		img {
 		  height: 3em;
@@ -87,10 +96,10 @@ header h1 {
 
 	&:hover {
 		cursor: pointer;
+		color: #fff;
 	}
 
-	opacity: 0;
-	transition: 2s;
+	
 }
 
 .load {
@@ -188,6 +197,10 @@ header h1 {
 	.desktop-button {
 		display: none;
 	}
+	a {
+		text-decoration: none;
+		color: $secondary-color;
+	}
 	h2 {
 		font-size: 1.5rem;
 		font-weight: 600;
@@ -202,7 +215,7 @@ header h1 {
 	.site-content {
 		padding: 0 10px;
 		text-align: center;
-		a {
+		.links {
 			display: inline-block;
 			background-color: $secondary-color;
 			padding: 10px 30px;
