@@ -15,8 +15,10 @@ body {
 }
 
 p {
-	font-size: 16px
+	font-size: 16px;
 }
+
+
 
 
 header {
@@ -120,9 +122,6 @@ header h1 {
 }
 
 .about {
-	.row-fluid {
-
-	}
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -191,6 +190,7 @@ header h1 {
 	padding-bottom: 100px;
 	padding-top: 100px;
 	background-color: #eee;
+
 	.mobile-button: {
 		display: inline-block;
 	}
@@ -222,7 +222,7 @@ header h1 {
 			color: $white;
 			text-decoration: none;
 			transition: .5s;
-			z-indx: 2;
+			z-index: 2;
 			border-radius: 5px;
 
 			&:hover {
@@ -241,17 +241,13 @@ header h1 {
 		&:hover, &:focus {
 			.img-cover {
 				transform: translateY(-150px);
-				opacity: 0;
-				
+				opacity: 0;			
 			}
 		}
 		img {
 			max-width: 100%;
 			height: 100%;
-
 		}
-
-		
 	}
 	.img-cover {
 		transition: .5s;
@@ -295,9 +291,7 @@ header h1 {
 		.site-b {
 			background-image: url('../img/twitch.jpg');
 		}
-
 	}
-
 }
 
 .study {
