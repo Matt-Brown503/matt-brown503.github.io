@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
+//loads landing page content
 	$('header').addClass(' load');
 	$('.scroll').addClass(' load');
 
 	
-	
-	var myFunction = function(check) {
+//function to load content based on scroll from top of screen
+	var scroller = function(check) {
 		$(window).scroll(function() {
 			if ($(window).scrollTop() + $(window).height() >= $(check).offset().top-100) {
 				$(check).parent().addClass(' slide');
@@ -13,21 +14,20 @@ $(document).ready(function(){
 		});
 	};
 
-	myFunction('.aboutcheck');
-
-	myFunction('.workcheck');
-
-	myFunction('.studycheck');
+	scroller('.aboutcheck');
+	scroller('.workcheck');
+	scroller('.studycheck');
+	scroller('.contactcheck');
 	
-	myFunction('.contactcheck');
 
-
+//requires own function to load
 	$(window).scroll(function() {
 		if ($(window).scrollTop() + $(window).height() >= $('.badge-info').offset().top-300) {
 			$('.th-badge').addClass(' badge-animate');
 		}
 	});
 
+//toggler for work content
 	$('.desktop-button').click(function(){
 		$('.a-group').toggleClass(' a-off');
 		$('.b-group').toggleClass(' b-off');
@@ -38,6 +38,8 @@ $(document).ready(function(){
 		$(this).remove();
 	});
 
+
+//scroll to first section on click
 	$('a[href^="#"').on('click', function(event) {
 		var target = $(this.getAttribute('href'));
 		if(target.length) {
@@ -50,7 +52,7 @@ $(document).ready(function(){
 	
 
 
-
+//get JSON for treehouse account
 	var myUrl = 'https://teamtreehouse.com/walterbrown2.json';
 	var badgeHTML = '';
 	var badgeInfo = [];
@@ -58,127 +60,65 @@ $(document).ready(function(){
 	var date = [];
 	var mobileInfo = [];
 	$.getJSON(myUrl)
-.done(function(data){
-	var badgeList = data.badges;
-	var points = data.points.total;
-	var myBadges = badgeList.length-1;
-	badgeList =  badgeList.reverse();
-	rawDate = badgeList[0].earned_date;
-	for (var i = 0; i < 5; i++) {
-		var badgeName = badgeList[i].name;
-		var badgeIcon = badgeList[i].icon_url;
-		var badgeLink = badgeList[i].url;
+	.done(function(data){
+		var badgeList = data.badges;
+		var points = data.points.total;
+		var myBadges = badgeList.length-1;
+		badgeList =  badgeList.reverse();
+		rawDate = badgeList[0].earned_date;
+		for (var i = 0; i < 5; i++) {
+			var badgeName = badgeList[i].name;
+			var badgeIcon = badgeList[i].icon_url;
+			var badgeLink = badgeList[i].url;
 
-		badgeHTML += '<a href='+badgeLink+' target=\'_blank\'><img src='+badgeIcon+' class=\'th-badge badge-'+[i]+'\'></a>';
+			badgeHTML += '<a href='+badgeLink+' target=\'_blank\'><img src='+badgeIcon+' class=\'th-badge badge-'+[i]+'\'></a>';
 
-		badgeInfo.push(badgeName);
+			badgeInfo.push(badgeName);
 
+		}
+		for (var j = 0; j < 10; j++) {
+			date.push(rawDate[j]);
+		}
+		date = date.join('');
 
-	}
-	for (var i = 0; i < 10; i++) {
-		date.push(rawDate[i]);
-	}
-	date = date.join('');
+		for (var k = 0; k < badgeInfo.length; k++) {
+			mobileInfo += '<p>'+badgeInfo[k]+'</p>';
+		}
 
-	for (var i = 0; i < badgeInfo.length; i++) {
-		mobileInfo += '<p>'+badgeInfo[i]+'</p>';
-	}
-
-	$('#date').html(date);
-	$('#badges').html(badgeHTML);
-	$('#lessons').html(myBadges);
-	$('#points').html(points);
-	$('.badge-info-mobile').html(mobileInfo);
+		$('#date').html(date);
+		$('#badges').html(badgeHTML);
+		$('#lessons').html(myBadges);
+		$('#points').html(points);
+		$('.badge-info-mobile').html(mobileInfo);
 		
+	//insert badge info content under badge
+		var defaultText = '<p>Hover badge for description</p>';	
+	//function mouseenter to add details text
+		var badgeDetails = function(badgeNum) {
+			$('.badge-' + badgeNum + '').mouseenter(function(){
+				$('.badge-info').animate({
+					width: 400,
+				},0, function(){
+					$('.badge-info').html('<p>'+badgeInfo[badgeNum]+'</p>');
 		
-		
-		
-		
+				});
+			});
+	//function mouseleave to reset details text
+			$('.badge-' + badgeNum + '').mouseleave(function(){
+				$('.badge-info').animate({
+					width: 300
+				},0, function(){
+					$('.badge-info').html(defaultText);
 
-	var defaultText = '<p>Hover badge for description</p>';
-	$('.badge-0').mouseenter(function(){
-		$('.badge-info').animate({
-			width: 400,
-		},0, function(){
-			$('.badge-info').html('<p>'+badgeInfo[0]+'</p>');
-		
-		});
-	});
-	$('.badge-0').mouseleave(function(){
-		$('.badge-info').animate({
-			width: 300
-		},0, function(){
-			$('.badge-info').html(defaultText);
+				});
+			});
+		};
 
-		});
-	});
+		badgeDetails(0);
+		badgeDetails(1);
+		badgeDetails(2);
+		badgeDetails(3);
+		badgeDetails(4);
 
-	$('.badge-1').mouseenter(function(){
-		$('.badge-info').animate({
-			width: 400
-		},0, function(){
-			$('.badge-info').html('<p>'+badgeInfo[1]+'</p>');
-
-		});
 	});
-	$('.badge-1').mouseleave(function(){
-		$('.badge-info').animate({
-			width: 300
-		},0, function(){
-			$('.badge-info').html(defaultText);
-
-		});
-	});
-
-	$('.badge-2').mouseenter(function(){
-		$('.badge-info').animate({
-			width: 400
-		},0, function(){
-			$('.badge-info').html('<p>'+badgeInfo[2]+'</p>');
-		
-		});
-	});
-	$('.badge-2').mouseleave(function(){
-		$('.badge-info').animate({
-			width: 300
-		},0, function(){
-			$('.badge-info').html(defaultText);
-		
-		});
-	});
-
-	$('.badge-3').mouseenter(function(){
-		$('.badge-info').animate({
-			width: 400
-		},0, function(){
-			$('.badge-info').html('<p>'+badgeInfo[3]+'</p>');
-			
-		});
-	});
-	$('.badge-3').mouseleave(function(){
-		$('.badge-info').animate({
-			width: 300
-		},0, function(){
-			$('.badge-info').html(defaultText);
-		
-		});
-	});
-
-	$('.badge-4').mouseenter(function(){
-		$('.badge-info').animate({
-			width: 400
-		},0, function(){
-			$('.badge-info').html('<p>'+badgeInfo[4]+'</p>');
-			
-		});
-	});
-	$('.badge-4').mouseleave(function(){
-		$('.badge-info').animate({
-			width: 300
-		},0, function(){
-			$('.badge-info').html(defaultText);
-		
-		});
-	});
-});
 });
